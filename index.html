@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="zh" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>IELTS 4000 词汇库</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <style>
+      /* ── TOKENS ── */
+      :root[data-theme="light"] {
+        --bg: #f5f1eb;
+        --bg2: #fff;
+        --bg3: #ede8e0;
+        --bd: #d9d2c6;
+        --t1: #1a1510;
+        --t2: #5a5044;
+        --tm: #9a9080;
+        --ac: #cc6b3e;
+        --ach: #b85c30;
+        --acl: rgba(204, 107, 62, 0.12);
+        --star: #e8a030;
+        --sh: 0 2px 10px rgba(0, 0, 0, 0.06);
+        --shl: 0 8px 28px rgba(0, 0, 0, 0.12);
+      }
+      :root[data-theme="dark"] {
+        --bg: #131110;
+        --bg2: #1d1a17;
+        --bg3: #252220;
+        --bd: #38322c;
+        --t1: #eeebe5;
+        --t2: #b5aa9e;
+        --tm: #6a6158;
+        --ac: #e8845a;
+        --ach: #f09070;
+        --acl: rgba(232, 132, 90, 0.14);
+        --star: #e8bc50;
+        --sh: 0 2px 10px rgba(0, 0, 0, 0.4);
+        --shl: 0 8px 28px rgba(0, 0, 0, 0.55);
+      }
+
+      /* ── RESET ── */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: "Source Serif 4", Georgia, serif;
+        background: var(--bg);
+        color: var(--t1);
+        min-height: 100vh;
+        transition: background 0.25s, color 0.25s;
+      }
+
+      /* ── HEADER ── */
+      header {
+        
+        position: sticky;
+        top: 0;
+        z-index: 300;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--bd);
+        box-shadow: var(--sh);
+      }
+      .hi { max-width: 1100px; padding: 11px 14px;  margin: 0 auto; }
+      .htop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .brand { flex-shrink: 0; }
+      .bt {
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--ac);
+      }
+      .bs {
+        display: block;
+        font-size: 9.5px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--tm);
+        font-weight: 300;
+      }
+      .sw { flex: 1; position: relative; }
+      .sw input {
+        width: 100%;
+        padding: 8px 32px 8px 33px;
+        border: 1.5px solid var(--bd);
+        border-radius: 22px;
+        background: var(--bg3);
+        color: var(--t1);
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .sw input::placeholder { color: var(--tm); }
+      .sw input:focus {
+        border-color: var(--ac);
+        box-shadow: 0 0 0 3px var(--acl);
+      }
+      .sico {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--tm);
+        font-size: 13px;
+        pointer-events: none;
+      }
+      .sclr {
+        position: absolute;
+        right: 9px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: var(--tm);
+        font-size: 15px;
+        opacity: 0;
+        transition: opacity 0.15s;
+        padding: 2px;
+        line-height: 1;
+      }
+      .sclr.v { opacity: 1; }
+
+      /* ── 搜索栏旁边的按钮 ── */
+      .top-btn {
+        flex-shrink: 0;
+        height: 35px;
+        padding: 0 12px;
+        border-radius: 18px;
+        border: 1.5px solid var(--bd);
+        background: var(--bg3);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+        transition: all 0.18s;
+        color: var(--t2);
+      }
+      .top-btn:hover { border-color: var(--ac); color: var(--ac); }
+      .top-btn.on {
+        background: var(--ac);
+        border-color: var(--ac);
+        color: #fff;
+      }
+      .ico-btn {
+        flex-shrink: 0;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 1.5px solid var(--bd);
+        background: var(--bg3);
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s;
+        color: var(--t2);
+      }
+      .ico-btn:hover { border-color: var(--ac); color: var(--ac); }
+
+      /* ── ALPHA NAV ── */
+      .alnav {
+        position: sticky;
+        top: 0;
+        z-index: 150;
+        background: var(--bg3);
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        padding: 5px 10px;
+        justify-content: center;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .alnav::-webkit-scrollbar { display: none; }
+      .ab {
+        min-width: 24px;
+        height: 24px;
+        border: none;
+        background: transparent;
+        border-radius: 4px;
+        font-family: "Playfair Display", serif;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s;
+        flex-shrink: 0;
+        color: var(--tm);
+      }
+      .ab.has { color: var(--t1); }
+      .ab.has:hover { background: var(--bd); }
+      .ab.on { background: var(--ac) !important; color: #fff; }
+      .ab.x { opacity: 0.2; cursor: default; }
+
+      /* ── LAYOUT ── */
+      .page-layout {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* ── AFFIX SIDEBAR ── */
+      .affix-bar {
+        border-right: 1px solid var(--bd);
+        border-left: 1px solid var(--bd);
+        position: fixed;
+        left: calc(50% - 500px);
+        top: 80px;
+        width: 90px;
+        height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding: 16px 8px;
+        scrollbar-width: none;
+        z-index: 100;
+      }
+      .affix-bar::-webkit-scrollbar { display: none; }
+      .affix-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .af-label {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--tm);
+        padding: 10px 4px 3px;
+      }
+      .af-label:first-child { padding-top: 2px; }
+      .af-divider {
+        height: 1px;
+        background: var(--bd);
+        margin: 6px 0;
+      }
+      .af {
+        padding: 5px 8px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        background: transparent;
+        color: var(--t2);
+        white-space: nowrap;
+        font-family: "Source Code Pro", monospace, inherit;
+        transition: all 0.18s;
+        text-align: left;
+        width: 100%;
+        letter-spacing: 0.3px;
+      }
+      .af:hover {
+        border-color: var(--ac);
+        color: var(--ac);
+        background: var(--acl);
+      }
+      .af.on {
+        background: var(--ac);
+        border-color: var(--ac);
+        color: #fff;
+      }
+
+      /* ── MAIN CONTENT ── */
+      .main-content {
+        width: 100%;
+        padding: 16px 14px 90px;
+      }
+      .stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        font-size: 12px;
+        color: var(--tm);
+      }
+      .stats strong { color: var(--ac); }
+
+      /* ── LETTER SECTION ── */
+      .lsec { margin-bottom: 20px; }
+      .lh {
+        font-family: "Playfair Display", serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--ac);
+        line-height: 1;
+        display: flex;
+        align-items: baseline;
+        gap: 9px;
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+        border-bottom: 1.5px solid var(--bd);
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.15s;
+      }
+      .lh:hover { opacity: 0.75; }
+      .lh .lc {
+        font-family: "Source Serif 4", serif;
+        font-size: 11.5px;
+        color: var(--tm);
+        font-weight: 300;
+        flex: 1;
+      }
+      .lh .l-chev {
+        font-size: 11px;
+        color: var(--tm);
+        transition: transform 0.25s;
+        margin-left: auto;
+      }
+      .lsec.collapsed .l-chev { transform: rotate(-90deg); }
+      .lsec.collapsed .l-words { display: none; }
+
+      /* ── WORD CARD ── */
+      .wc {
+        background: var(--bg2);
+        border: 1px solid var(--bd);
+        border-left: 3px solid transparent;
+        border-radius: 9px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .wc:hover { box-shadow }
+      .wc.starred { border-left-color: var(--star); }
+      .wh {
+        display: flex;
+        align-items: center;
+        padding: 11px 12px;
+        gap: 7px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .ww {
+        font-family: "Playfair Display", serif;
+        font-size: 16.5px;
+        font-weight: 700;
+        color: var(--t1);
+: var(--sh); border-color: var(--ac);        flex-shrink: 0;
+      }
+      .ph {
+        font-size: 12px;
+        color: var(--ac);
+        font-style: italic;
+        margin-left: 4px;
+        font-family: "Source Serif 4", serif;
+        flex-shrink: 0;
+      }
+      .ph-loading { opacity: 0.4; }
+      .wp {
+        font-size: 12.5px;
+        color: var(--tm);
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-left: 4px;
+      }
+      .wa {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+      .snd {
+        margin-left: 4px;
+        background: none;
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        font-size: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--tm);
+        transition: all 0.2s;
+      }
+      .snd:hover { border-color: var(--ac); color: var(--ac); }
+      .snd.playing {
+        border-color: var(--ac);
+        color: var(--ac);
+        background: var(--acl);
+        animation: pulse 0.6s ease infinite alternate;
+      }
+      @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.15); }
+      }
+      .dict-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--tm);
+        transition: color 0.2s;
+        padding: 0 3px;
+      }
+      .dict-btn:hover { color: var(--ac); }
+      .sbtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 17px;
+        line-height: 1;
+        color: var(--bd);
+        transition: color 0.18s, transform 0.15s;
+        padding: 2px;
+      }
+      .sbtn:hover { transform: scale(1.25); }
+      .sbtn.on { color: var(--star); }
+      .chev {
+        color: var(--tm);
+        font-size: 9px;
+        transition: transform 0.22s;
+        flex-shrink: 0;
+        width: 12px;
+        text-align: center;
+      }
+      .wc.open .chev { transform: rotate(180deg); }
+      .wb {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .wc.open .wb { max-height: 600px; }
+      .wd {
+        padding: 9px 14px 13px;
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--t2);
+        border-top: 1px solid var(--bd);
+      }
+      .dp {
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+        margin-bottom: 3px;
+      }
+      .dp:last-child { margin-bottom: 0; }
+      .ddot {
+        color: var(--ac);
+        font-size: 17px;
+        line-height: 1.5;
+        flex-shrink: 0;
+      }
+
+      mark {
+        background: var(--acl);
+        color: var(--ac);
+        border-radius: 2px;
+        padding: 0 1px;
+        font-style: normal;
+      }
+
+      /* ── LOADING / EMPTY ── */
+      .center {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--tm);
+      }
+      .center .ei { font-size: 48px; margin-bottom: 12px; }
+      .center p { font-size: 15px; line-height: 1.7; }
+      .center code {
+        background: var(--bg3);
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: var(--ac);
+      }
+
+      /* ── FAB ── */
+      .fab {
+        position: fixed;
+        bottom: 20px;
+        right: 16px;
+        z-index: 100;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--ac);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shl);
+        opacity: 0;
+        transform: translateY(12px) scale(0.85);
+        transition: opacity 0.25s, transform 0.25s;
+      }
+      .fab.show { opacity: 1; transform: none; }
+      .fab:hover { background: var(--ach); }
+
+      @media (max-width: 1060px) {
+        .affix-bar {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: auto;
+          width: 100%;
+          height: auto;
+          padding: 6px 12px 8px;
+          border-right: none;
+          border-top: 1px solid var(--bd);
+          background: var(--bg2);
+          box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+          z-index: 200;
+          overflow-x: auto;
+          overflow-y: hidden;
+        }
+        .affix-inner {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          gap: 5px;
+          overflow-x: auto;
+        }
+        .af-label {
+          padding: 0 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .af-divider {
+          width: 1px;
+          height: 16px;
+          background: var(--bd);
+          flex-shrink: 0;
+        }
+        .main-content {
+          padding-bottom: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="hi">
+        <div class="htop">
+          <div class="brand">
+            <span class="bt">IELTS 4000</span>
+            <span class="bs">Academic Word List</span>
+          </div>
+          <div class="sw">
+            <span class="sico">🔍</span>
+            <input type="text" id="si" placeholder="搜索单词或释义…" autocomplete="off" spellcheck="false" />
+            <button class="sclr" id="scl">✕</button>
+          </div>
+          <button class="top-btn" id="expandBtn" title="展开/折叠全部单词">📖 展开</button>
+          
+          <button class="top-btn" id="starFilterBtn" title="只看收藏">⭐ 收藏 (<span id="sc2">0</span>)</button>
+          <button class="ico-btn" id="tb">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="alnav" id="alnav"></nav>
+
+    <div class="page-layout">
+      <div class="affix-bar" id="affixBar" style="display:none">
+        <div class="affix-inner" id="affixInner"></div>
+      </div>
+
+      <main class="main-content">
+        <div class="stats" id="stats" style="display:none">
+          <span>显示 <strong id="vc">0</strong> / <strong id="tc">0</strong> 词</span>
+          <span id="sl">⭐ 0 收藏</span>
+        </div>
+        <div id="list"></div>
+      </main>
+    </div>
+
+    <button class="fab" id="fab">↑</button>
+
+    <script>
+      /* ── STATE ── */
+      let DB = [];
+      let starred = new Set(JSON.parse(localStorage.getItem("ielts_s") || "[]"));
+      let filter = "all";
+      let search = "";
+      let letter = "ALL";
+      let opened = new Set();
+      let collapsedLetters = new Set();
+      let affixFilter = new Set();
+      let AFFIXES = [];
+      let dark = localStorage.getItem("ielts_th") === "dark";
+      let allExpanded = false;
+
+      /* ── PARSE TXT ── */
+      function parseTxt(text) {
+        return text
+          .split("\n")
+          .map(l => l.trim())
+          .filter(l => l && !/^IELTS/i.test(l) && !/^[A-Z]$/.test(l))
+          .reduce((a, line) => {
+            const ci = line.indexOf(":");
+            if (ci > 0) {
+              const w = line.slice(0, ci).trim();
+              const d = line.slice(ci + 1).trim();
+              if (w && d) a.push({ w, d, L: w[0].toUpperCase() });
+            }
+            return a;
+          }, []);
+      }
+
+      /* ── LOAD AFFIXES CSV ── */
+      fetch("data/suffixes.csv")
+        .then(r => r.text())
+        .then(text => {
+          AFFIXES = [];
+          text.split(/\r?\n/).forEach(line => {
+            const cols = line.split(",");
+            const first = (cols[0] || "").trim().replace(/^\uFEFF/, "");
+            if (!first) return;
+            const meaning = (cols[1] || "").trim();
+            const isAffix = first.includes("-");
+            if (isAffix) {
+              AFFIXES.push({ type: "affix", text: first, meaning });
+            } else {
+              AFFIXES.push({ type: "label", text: first });
+            }
+          });
+          renderAffixBar();
+        })
+        .catch(() => {});
+
+      /* ── LOAD MAIN DATA ── */
+      fetch("data/IELTS-4000.txt")
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(text => {
+          DB = parseTxt(text);
+          if (!DB.length) throw new Error("empty");
+          document.getElementById("stats").style.display = "flex";
+          render();
+        })
+        .catch(() => {
+          document.getElementById("list").innerHTML = `
+            <div class="center">
+              <div class="ei">📂</div>
+              <p>无法读取词库文件<br><br>
+              请确认目录结构：<br>
+              <code>index.html</code><br>
+              <code>data/IELTS-4000.txt</code><br><br>
+              并通过本地服务器打开，例如：<br>
+              <code>python3 -m http.server</code></p>
+            </div>`;
+        });
+
+      /* ── PHONETIC ── */
+      const phoneticCache = {};
+      async function fetchPhonetic(word) {
+        if (phoneticCache[word] !== undefined) return phoneticCache[word];
+        phoneticCache[word] = "";
+        try {
+          const r = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+          const data = await r.json();
+          const ph = data[0]?.phonetic || data[0]?.phonetics?.find(p => p.text)?.text || "";
+          phoneticCache[word] = ph;
+          return ph;
+        } catch { return ""; }
+      }
+      async function loadPhoneticsForGroup(words) {
+        const BATCH = 5;
+        for (let i = 0; i < words.length; i += BATCH) {
+          await Promise.all(words.slice(i, i + BATCH).map(async x => {
+            if (phoneticCache[x.w] !== undefined) {
+              const el = document.getElementById(`ph-${x.w}`);
+              if (el && phoneticCache[x.w]) { el.textContent = phoneticCache[x.w]; el.classList.remove("ph-loading"); }
+              return;
+            }
+            const ph = await fetchPhonetic(x.w);
+            const el = document.getElementById(`ph-${x.w}`);
+            if (el) { el.textContent = ph || ""; el.classList.remove("ph-loading"); }
+          }));
+          await new Promise(res => setTimeout(res, 80));
+        }
+      }
+
+      /* ── AUDIO ── */
+      let currentAudio = null;
+      function playWord(word, btn) {
+        if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+        document.querySelectorAll(".snd.playing").forEach(b => b.classList.remove("playing"));
+        const audio = new Audio(`https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(word)}&type=2`);
+        currentAudio = audio;
+        if (btn) btn.classList.add("playing");
+        audio.play().catch(() => {});
+        audio.onended = audio.onerror = () => { if (btn) btn.classList.remove("playing"); currentAudio = null; };
+      }
+
+      /* ── HELPERS ── */
+      function saveS() { localStorage.setItem("ielts_s", JSON.stringify([...starred])); }
+
+      function filtered() {
+        let r = DB;
+        if (filter === "starred") r = r.filter(x => starred.has(x.w));
+        if (search) {
+          const q = search.toLowerCase();
+          r = r.filter(x => x.w.toLowerCase().includes(q) || x.d.toLowerCase().includes(q));
+        }
+        if (letter !== "ALL") r = r.filter(x => x.L === letter);
+        if (affixFilter.size > 0) {
+          r = r.filter(x => {
+            const w = x.w.toLowerCase();
+            return [...affixFilter].some(af => {
+              if (af.startsWith("-")) return w.endsWith(af.slice(1));
+              if (af.endsWith("-"))   return w.startsWith(af.slice(0, -1));
+              return false;
+            });
+          });
+        }
+        return r;
+      }
+
+      function groups(list) {
+        return list.reduce((g, x) => { (g[x.L] = g[x.L] || []).push(x); return g; }, {});
+      }
+
+      function hl(t, q) {
+        if (!q) return t;
+        return t.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"), m => `<mark>${m}</mark>`);
+      }
+
+      function affixHL(word, q) {
+        if (affixFilter.size === 0) return hl(word, q);
+        let result = word;
+        for (const af of affixFilter) {
+          const w = word.toLowerCase();
+          if (af.startsWith("-")) {
+            const suffix = af.slice(1);
+            if (w.endsWith(suffix)) {
+              const cut = word.length - suffix.length;
+              result = hl(word.slice(0, cut), q) + `<mark>${word.slice(cut)}</mark>`;
+              return result;
+            }
+          } else if (af.endsWith("-")) {
+            const prefix = af.slice(0, -1);
+            if (w.startsWith(prefix)) {
+              result = `<mark>${word.slice(0, prefix.length)}</mark>` + hl(word.slice(prefix.length), q);
+              return result;
+            }
+          }
+        }
+        return hl(word, q);
+      }
+
+      function defHTML(d, q) {
+        return d.split(";").map(s => s.trim()).filter(Boolean)
+          .map(p => `<div class="dp"><span class="ddot">•</span><span>${hl(p, q)}</span></div>`)
+          .join("");
+      }
+
+      /* ── RENDER AFFIX BAR ── */
+      function renderAffixBar() {
+        const bar = document.getElementById("affixBar");
+        const inner = document.getElementById("affixInner");
+        const affixes = AFFIXES.filter(x => x.type === "affix");
+        if (!affixes.length) { bar.style.display = "none"; return; }
+        bar.style.display = "";
+
+        let html = "";
+        let firstLabel = true;
+        AFFIXES.forEach(item => {
+          if (item.type === "label") {
+            if (!firstLabel) html += `<div class="af-divider"></div>`;
+            html += `<div class="af-label">${item.text}</div>`;
+            firstLabel = false;
+          } else {
+            const on = affixFilter.has(item.text) ? " on" : "";
+            html += `<button class="af${on}" data-af="${item.text}" title="${item.meaning}">${item.text}</button>`;
+          }
+        });
+        inner.innerHTML = html;
+
+        inner.querySelectorAll(".af").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const af = btn.dataset.af;
+            if (affixFilter.has(af)) affixFilter.delete(af);
+            else affixFilter.add(af);
+            btn.classList.toggle("on");
+            render();
+          });
+        });
+      }
+
+      /* ── RENDER ALPHA NAV ── */
+      function renderAlpha() {
+        const has = new Set(DB.map(x => x.L));
+        const nav = document.getElementById("alnav");
+        nav.innerHTML =
+          `<button class="ab has ${letter === "ALL" ? "on" : ""}" data-l="ALL">All</button>` +
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
+            `<button class="ab ${has.has(l) ? "has" : "x"} ${letter === l ? "on" : ""}" data-l="${l}">${l}</button>`
+          ).join("");
+        nav.querySelectorAll(".ab").forEach(b => {
+          b.addEventListener("click", () => {
+            if (b.classList.contains("x")) return;
+            letter = b.dataset.l;
+            render();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        });
+      }
+
+      /* ── RENDER WORD LIST ── */
+      let displayLimit = 100;
+
+      function renderList() {
+        const list = filtered();
+        const totalFound = list.length;
+        const limitedList = list.slice(0, displayLimit);
+        const g = groups(limitedList);
+        const q = search.toLowerCase();
+        const el = document.getElementById("list");
+
+        document.getElementById("vc").textContent = totalFound;
+        document.getElementById("tc").textContent = DB.length;
+        document.getElementById("sl").textContent = `⭐ ${starred.size} 收藏`;
+        document.getElementById("sc2").textContent = starred.size;
+
+        if (!limitedList.length) {
+          el.innerHTML = `<div class="center"><div class="ei">📚</div><p>没有找到匹配的单词</p></div>`;
+          return;
+        }
+
+        let html = Object.keys(g).sort().map(L => {
+          const isCollapsed = collapsedLetters.has(L);
+          return `
+          <div class="lsec ${isCollapsed ? "collapsed" : ""}" id="L-${L}">
+            <div class="lh" data-letter="${L}">
+              ${L}
+              <span class="lc">${g[L].length} words</span>
+              <span class="l-chev">▾</span>
+            </div>
+            <div class="l-words">
+              ${g[L].map(x => `
+              <div class="wc ${opened.has(x.w) ? "open" : ""} ${starred.has(x.w) ? "starred" : ""}" data-w="${x.w}">
+                <div class="wh">
+                  <span class="ww">${affixHL(x.w, q)}</span>
+                  <span class="ph ph-loading" id="ph-${x.w}">…</span>
+                  <button class="snd" data-p="${x.w}" title="发音">🔊</button>
+                  <span class="wp">${x.d.split(";")[0].trim()}</span>
+                  <div class="wa">
+                    
+                    <button class="dict-btn" data-youdao="${x.w}" title="查看有道词典">💻</button>
+
+                    <button class="dict-btn" data-dlink="${x.w}" title="查看柯林斯词典">📖</button>
+                    <button class="sbtn ${starred.has(x.w) ? "on" : ""}" data-s="${x.w}" title="收藏">★</button>
+                    <span class="chev">▼</span>
+                  </div>
+                </div>
+                <div class="wb"><div class="wd">${defHTML(x.d, q)}</div></div>
+              </div>`).join("")}
+            </div>
+          </div>`;
+        }).join("");
+
+        if (totalFound > displayLimit) {
+          html += `<button id="loadMore" style="width:100%;padding:16px;background:var(--bg3);border:1px solid var(--bd);color:var(--ac);cursor:pointer;border-radius:12px;margin:20px 0;font-family:inherit;font-weight:600;font-size:14px;">显示更多单词（还有 ${totalFound - displayLimit} 个）</button>`;
+        }
+
+        el.innerHTML = html;
+
+        const lmBtn = document.getElementById("loadMore");
+        if (lmBtn) lmBtn.onclick = () => { displayLimit += 200; renderList(); };
+
+        el.querySelectorAll(".lh[data-letter]").forEach(lh => {
+          lh.addEventListener("click", () => {
+            const L = lh.dataset.letter;
+            const sec = document.getElementById(`L-${L}`);
+            if (collapsedLetters.has(L)) {
+              collapsedLetters.delete(L);
+              sec.classList.remove("collapsed");
+            } else {
+              collapsedLetters.add(L);
+              sec.classList.add("collapsed");
+            }
+          });
+        });
+
+        Object.keys(g).forEach(L => loadPhoneticsForGroup(g[L]));
+
+        el.querySelectorAll(".wc").forEach(card => {
+          const word = card.dataset.w;
+          card.querySelector(".wh").addEventListener("click", ev => {
+            if (ev.target.closest(".snd, .dict-btn, .sbtn")) return;
+            const isOpen = card.classList.toggle("open");
+            isOpen ? opened.add(word) : opened.delete(word);
+            updateExpandBtnState();
+          });
+        });
+
+        el.querySelectorAll(".snd").forEach(b => {
+          b.addEventListener("click", ev => { ev.stopPropagation(); playWord(b.dataset.p, b); });
+        });
+
+        el.querySelectorAll(".dict-btn[data-dlink]").forEach(b => {
+          b.addEventListener("click", ev => {
+            ev.stopPropagation();
+            window.open(`https://www.collinsdictionary.com/dictionary/english/${b.dataset.dlink}`, "_blank");
+          });
+        });
+
+    el.querySelectorAll(".dict-btn[data-youdao]").forEach(b => {
+  b.addEventListener("click", ev => {
+    ev.stopPropagation();
+    window.open(`https://youdao.com/result?word=${encodeURIComponent(b.dataset.youdao)}&lang=en`, "_blank");
+  });
+});
+
+
+
+        el.querySelectorAll("[data-s]").forEach(b => {
+          b.addEventListener("click", ev => {
+            ev.stopPropagation();
+            const w = b.dataset.s;
+            starred.has(w) ? starred.delete(w) : starred.add(w);
+            saveS();
+            const card = el.querySelector(`[data-w="${w}"]`);
+            if (card) {
+              card.classList.toggle("starred", starred.has(w));
+              b.classList.toggle("on", starred.has(w));
+            }
+            document.getElementById("sl").textContent = `⭐ ${starred.size} 收藏`;
+            document.getElementById("sc2").textContent = starred.size;
+          });
+        });
+
+        updateExpandBtnState();
+      }
+
+      /* ── 展开/折叠全部 ── */
+      function updateExpandBtnState() {
+        const btn = document.getElementById("expandBtn");
+        const visibleCards = document.querySelectorAll(".wc");
+        const openCards = document.querySelectorAll(".wc.open");
+        allExpanded = visibleCards.length > 0 && visibleCards.length === openCards.length;
+        btn.textContent = allExpanded ? "📖 折叠" : "📖 展开";
+        btn.classList.toggle("on", allExpanded);
+      }
+
+      document.getElementById("expandBtn").addEventListener("click", () => {
+        const visibleCards = document.querySelectorAll(".wc");
+        if (allExpanded) {
+          // 折叠全部
+          visibleCards.forEach(card => {
+            card.classList.remove("open");
+            opened.delete(card.dataset.w);
+          });
+          allExpanded = false;
+        } else {
+          // 展开全部
+          visibleCards.forEach(card => {
+            card.classList.add("open");
+            opened.add(card.dataset.w);
+          });
+          allExpanded = true;
+        }
+        updateExpandBtnState();
+      });
+
+      /* ── 收藏筛选按钮 ── */
+      const starFilterBtn = document.getElementById("starFilterBtn");
+      starFilterBtn.addEventListener("click", () => {
+        if (filter === "starred") {
+          filter = "all";
+          starFilterBtn.classList.remove("on");
+        } else {
+          filter = "starred";
+          starFilterBtn.classList.add("on");
+        }
+        displayLimit = 100;
+        render();
+      });
+
+      /* ── RENDER ── */
+      function render() {
+        if (!DB.length) return;
+        renderAlpha();
+        renderList();
+      }
+
+      /* ── SEARCH ── */
+      const siEl = document.getElementById("si");
+      const sclEl = document.getElementById("scl");
+      siEl.addEventListener("input", () => {
+        search = siEl.value;
+        letter = "ALL";
+        displayLimit = 100;
+        sclEl.classList.toggle("v", !!search);
+        render();
+      });
+      sclEl.addEventListener("click", () => {
+        siEl.value = ""; search = "";
+        sclEl.classList.remove("v");
+        siEl.focus(); render();
+      });
+
+      /* ── THEME ── */
+      const tb = document.getElementById("tb");
+      function applyTheme() {
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        tb.textContent = dark ? "☀️" : "🌙";
+        localStorage.setItem("ielts_th", dark ? "dark" : "light");
+      }
+      tb.addEventListener("click", () => { dark = !dark; applyTheme(); });
+      applyTheme();
+
+      /* ── FAB ── */
+      const fab = document.getElementById("fab");
+      window.addEventListener("scroll", () => {
+        fab.classList.toggle("show", scrollY > 300);
+      });
+      fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    </script>
+  </body>
+</html>
