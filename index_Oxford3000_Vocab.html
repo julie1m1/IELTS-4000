@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>IELTS 4000 词汇库</title>
+    <title>Oxford3000_Vocab</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
     <style>
       /* ── 防止水平滚动 ── */
@@ -382,6 +382,14 @@
         white-space: nowrap;
         margin-left: 4px;
       }
+      .wp .pos-tag {
+  color: var(--ac);
+  font-weight: 700;
+  font-style: italic;
+  margin-right: 2px;
+  font-size: smaller;
+}
+
       .wa {
         display: flex;
         align-items: center;
@@ -448,9 +456,10 @@
       .wb {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.25s ease;
       }
-      .wc.open .wb { max-height: 600px; }
+      .wc.open .wb { max-height: none; }
       .wd {
         padding: 9px 14px 13px;
         font-size: 14px;
@@ -611,11 +620,51 @@
         border-bottom: 1px solid var(--bd);
       }
 
+
+      /* Tooltip 关闭按钮样式 */
+.tt-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg3);
+  color: var(--tm);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.2s;
+}
+
+.tt-close:hover {
+  background: var(--acl);
+  color: var(--ac);
+}
+
       /* ══════════════════════════════════════════════ */
       /* ── 移动端响应式优化 ── */
       /* ══════════════════════════════════════════════ */
       @media (max-width: 768px) {
         /* Header 布局优化 */
+
+        .tooltip {
+    transform: translateY(20px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .tooltip.visible {
+    transform: translateY(0);
+  }
+  /* 移动端标题加粗一些，留出按钮位置 */
+  .tooltip .tt-word {
+    padding-right: 35px; 
+  }
+
+
         .hi {
           padding: 8px 10px;
         }
@@ -711,13 +760,19 @@
           font-size: 11px;
         }
 
-        .wp {
-          font-size: 11px;
-          flex-basis: 100%;
-          order: 10;
-          margin-left: 0;
-          margin-top: 4px;
-        }
+      .wp {
+  font-size: 12.5px;
+  color: var(--tm);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
+
+
 
         .wa {
           gap: 3px;
@@ -864,8 +919,8 @@
       <div class="hi">
         <div class="htop">
           <div class="brand">
-            <span class="bt">IELTS 4000</span>
-            <span class="bs">Academic Word List</span>
+            <span class="bt">Oxford3000_Vocab</span>
+            <span class="bs">Word List</span>
           </div>
           <div class="sw">
             <span class="sico">🔍</span>
@@ -912,22 +967,58 @@
       let dark = localStorage.getItem("ielts_th") === "dark";
       let allExpanded = false;
 
-      /* ── PARSE TXT ── */
-      function parseTxt(text) {
-        return text
-          .split("\n")
-          .map(l => l.trim())
-          .filter(l => l && !/^IELTS/i.test(l) && !/^[A-Z]$/.test(l))
-          .reduce((a, line) => {
-            const ci = line.indexOf(":");
-            if (ci > 0) {
-              const w = line.slice(0, ci).trim();
-              const d = line.slice(ci + 1).trim();
-              if (w && d) a.push({ w, d, L: w[0].toUpperCase() });
-            }
-            return a;
-          }, []);
+     
+  /* ── PARSE CSV ── */
+function parseCSV(text) {
+  const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) return [];
+
+  // 解析一行 CSV（处理引号内的逗号）
+  function parseLine(line) {
+    const fields = [];
+    let current = "";
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuotes && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (ch === "," && !inQuotes) {
+        fields.push(current.trim());
+        current = "";
+      } else {
+        current += ch;
       }
+    }
+    fields.push(current.trim());
+    return fields;
+  }
+
+  // 跳过标题行（第一行）
+  return lines.slice(1).reduce((arr, line) => {
+    const f = parseLine(line);
+    if (f.length >= 2 && f[0]) {
+      arr.push({
+        w:   f[0] || "",   // Word
+        d:   f[1] || "",   // Definition
+        tr:  f[2] || "",   // Turkish Translation
+        ex:  f[3] || "",   // Example Sentence
+        pos: f[4] || "",   // Part of Speech
+        rf:  f[5] || "",   // Related Forms
+        syn: f[6] || "",   // Synonyms
+        ant: f[7] || "",   // Antonyms
+        col: f[8] || "",   // Collocations
+        L:   (f[0] || " ")[0].toUpperCase()  // 首字母
+      });
+    }
+    return arr;
+  }, []);
+}
+
 
       /* ── LOAD AFFIXES CSV ── */
       fetch("data/suffixes.csv")
@@ -951,29 +1042,30 @@
         .catch(() => {});
 
       /* ── LOAD MAIN DATA ── */
-      fetch("data/IELTS-4000.txt")
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
-        .then(text => {
-          DB = parseTxt(text);
-          if (!DB.length) throw new Error("empty");
-          document.getElementById("stats").style.display = "flex";
-          render();
-        })
-        .catch(() => {
-          document.getElementById("list").innerHTML = `
-            <div class="center">
-              <div class="ei">📂</div>
-              <p>无法读取词库文件<br><br>
-              请确认目录结构：<br>
-              <code>index.html</code><br>
-              <code>data/IELTS-4000.txt</code><br><br>
-              并通过本地服务器打开，例如：<br>
-              <code>python3 -m http.server</code></p>
-            </div>`;
-        });
+    fetch("data/Oxford3000_Vocab.csv")
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(text => {
+    DB = parseCSV(text);
+    if (!DB.length) throw new Error("empty");
+    document.getElementById("stats").style.display = "flex";
+    render();
+  })
+  .catch(() => {
+    document.getElementById("list").innerHTML = `
+      <div class="center">
+        <div class="ei">📂</div>
+        <p>无法读取词库文件<br><br>
+        请确认目录结构：<br>
+        <code>index.html</code><br>
+        <code>data/IELTS-4000.csv</code><br><br>
+        并通过本地服务器打开，例如：<br>
+        <code>python3 -m http.server</code></p>
+      </div>`;
+  });
+
 
       /* ── PHONETIC ── */
-      /* ── PHONETIC ── */
+/* ── PHONETIC ── */
 const phoneticCache = {};
 async function fetchPhonetic(word) {
   // 已有缓存且非空，直接返回
@@ -1033,7 +1125,10 @@ async function loadPhoneticsForGroup(words) {
         if (filter === "starred") r = r.filter(x => starred.has(x.w));
         if (search) {
           const q = search.toLowerCase();
-          r = r.filter(x => x.w.toLowerCase().includes(q) || x.d.toLowerCase().includes(q));
+          r = r.filter(x =>
+  [x.w, x.d, x.ex, x.pos, x.rf, x.syn, x.ant, x.col]
+    .some(field => field.toLowerCase().includes(q))
+);
         }
         if (letter !== "ALL") r = r.filter(x => x.L === letter);
         if (affixFilter.size > 0) {
@@ -1086,6 +1181,53 @@ async function loadPhoneticsForGroup(words) {
           .map(p => `<div class="dp"><span class="ddot">•</span><span>${hl(p, q)}</span></div>`)
           .join("");
       }
+
+
+
+
+      /* ── 详情区渲染（展示所有9列）── */
+function detailHTML(x, q) {
+  const fields = [
+    { label: "Definition",         value: x.d,   icon: "📖" },
+    
+    { label: "Example Sentence",   value: x.ex,  icon: "💬" },
+    { label: "Part of Speech",     value: x.pos, icon: "🏷️" },
+    { label: "Related Forms",      value: x.rf,  icon: "🔗" },
+    { label: "Synonyms",           value: x.syn, icon: "🔄" },
+    { label: "Antonyms",           value: x.ant, icon: "⚡" },
+    { label: "Collocations",       value: x.col, icon: "📝" },
+  ];
+
+  return fields
+    .filter(f => f.value && f.value !== "none")
+    .map(f => {
+      // 对多值字段（逗号分隔）逐个高亮
+      let content;
+      if (["Synonyms", "Antonyms", "Related Forms", "Collocations"].includes(f.label)) {
+        content = f.value.split(",").map(s => s.trim()).filter(Boolean)
+          .map(s => `<span style="display:inline-block;background:var(--acl);color:var(--ac);padding:1px 8px;border-radius:10px;margin:2px 3px;font-size:12.5px;">${hl(s, q)}</span>`)
+          .join("");
+      } else if (f.label === "Example Sentence") {
+        content = `<em>${hl(f.value, q)}</em>`;
+      } else {
+        content = hl(f.value, q);
+      }
+
+      return `<div class="dp" style="flex-direction:column;gap:3px;margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:0.8px;">
+          ${f.icon} ${f.label}
+        </div>
+        <div style="color:var(--t2);font-size:13.5px;line-height:1.7;padding-left:4px;">${content}</div>
+      </div>`;
+    })
+    .join("") || `<div class="dp"><span class="ddot">•</span><span>${hl(x.d, q)}</span></div>`;
+}
+
+
+
+
+
+
 
       /* ── RENDER AFFIX BAR ── */
       function renderAffixBar() {
@@ -1187,7 +1329,7 @@ async function loadPhoneticsForGroup(words) {
         if (!wordData) return;
 
         e.preventDefault();
-        showTooltip(e, word, wordData.d);
+        showTooltip(e, word, wordData);
       });
 
       // 点击其他地方隐藏 tooltip
@@ -1202,42 +1344,71 @@ async function loadPhoneticsForGroup(words) {
         if (e.key === 'Escape') hideTooltip();
       });
 
-      function showTooltip(event, word, content) {
-        tooltip.innerHTML = `<div class="tt-word">${word}</div>` + defHTML(content, search);
+        function showTooltip(event, word, wordData) {
+  // 添加关闭按钮 HTML (仅在移动端显示效果更好)
+  const closeBtn = isMobile() ? `<button class="tt-close" id="ttClose">✕</button>` : '';
+  
+  tooltip.innerHTML = `
+    ${closeBtn}
+    <div class="tt-word">${word}</div>
+    <div class="tt-body">
+      ${detailHTML(wordData, search)}
+    </div>
+  `;
 
-        if (isMobile()) {
-          // 移动端：固定在屏幕底部
-          tooltip.style.position = 'fixed';
-          tooltip.style.left = '10px';
-          tooltip.style.right = '10px';
-          tooltip.style.top = 'auto';
-          tooltip.style.bottom = '70px';
-          tooltip.style.maxWidth = 'none';
-          tooltip.style.width = 'auto';
-        } else {
-          // 桌面端：跟随鼠标
-          let x = event.clientX + 15;
-          let y = event.clientY + 10;
-          tooltip.style.position = 'fixed';
-          tooltip.style.left = x + 'px';
-          tooltip.style.top = y + 'px';
-          tooltip.style.maxWidth = '320px';
-          tooltip.style.width = 'auto';
+  if (isMobile()) {
+    tooltip.style.position = 'fixed';
+    tooltip.style.left = '10px';
+    tooltip.style.right = '10px';
+    tooltip.style.top = 'auto';
+    tooltip.style.bottom = '70px';
+    tooltip.style.maxWidth = 'none';
+    tooltip.style.width = 'auto';
+    tooltip.style.maxHeight = '70vh'; // 增加一点高度，方便阅读
+    tooltip.style.overflowY = 'auto';
+    
+    // 移动端点击关闭按钮
+    document.getElementById('ttClose').onclick = (e) => {
+      e.stopPropagation();
+      hideTooltip();
+    };
+  } else {
+    // 桌面端逻辑保持不变...
+    let x = event.clientX + 15;
+    let y = event.clientY + 10;
+    tooltip.style.position = 'fixed';
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+    tooltip.style.maxWidth = '350px';
+    tooltip.style.width = 'auto';
 
-          // 检查边界
-          requestAnimationFrame(() => {
-            const rect = tooltip.getBoundingClientRect();
-            if (rect.right > window.innerWidth - 10) {
-              tooltip.style.left = (event.clientX - rect.width - 10) + 'px';
-            }
-            if (rect.bottom > window.innerHeight - 10) {
-              tooltip.style.top = (event.clientY - rect.height - 10) + 'px';
-            }
-          });
-        }
-
-        tooltip.classList.add('visible');
+    requestAnimationFrame(() => {
+      const rect = tooltip.getBoundingClientRect();
+      if (rect.right > window.innerWidth - 10) {
+        tooltip.style.left = (event.clientX - rect.width - 10) + 'px';
       }
+      if (rect.bottom > window.innerHeight - 10) {
+        tooltip.style.top = (event.clientY - rect.height - 10) + 'px';
+      }
+    });
+  }
+
+  tooltip.classList.add('visible');
+    
+
+
+
+  
+}
+
+
+
+
+
+
+
+
+  
 
       function hideTooltip() {
         tooltip.classList.remove('visible');
@@ -1282,7 +1453,7 @@ async function loadPhoneticsForGroup(words) {
                       <span class="ph ph-loading" id="ph-${x.w}">…</span>
                       <button class="snd" data-p="${x.w}" title="发音">🔊</button>
                     </div>
-                    <span class="wp">${x.d.split(";")[0].trim()}</span>
+                    <span class="wp">${x.pos ? `<span class="pos-tag">${x.pos}</span> ` : ""}${x.d.split(";")[0].trim()}</span>
                     <div class="wa">
                       <button class="dict-btn" data-youdao="${x.w}" title="查看merriam-webster词典">💻</button>
                       <button class="dict-btn" data-dlink="${x.w}" title="查看柯林斯词典">📖</button>
@@ -1290,7 +1461,9 @@ async function loadPhoneticsForGroup(words) {
                       <span class="chev">▼</span>
                     </div>
                   </div>
-                  <div class="wb"><div class="wd">${defHTML(x.d, q)}</div></div>
+               
+<div class="wb"><div class="wd">${detailHTML(x, q)}</div></div>
+
                 </div>`).join("")}
               </div>
             </div>`;
